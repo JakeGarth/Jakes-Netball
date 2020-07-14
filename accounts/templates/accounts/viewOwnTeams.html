@@ -1,0 +1,75 @@
+{% extends 'testing.html' %}
+
+
+{% block table %}
+
+{% if request.user.username != accountName%}
+  <p> This is not your account </p>
+{% else %}
+
+<br>
+
+			<form method="get">
+
+				{{myFilter.form}}
+
+		    <button class="btn btn-primary" type="submit">Search</button>
+		  </form>
+
+<br>
+
+
+<h1> You are looking at teams you have advertised! </h1>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Team Name</th>
+        <th>Contact Username</th>
+        <th>Organisation</th>
+        <th>Sport</th>
+        <th>Day</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Game Length</th>
+        <th>Location </th>
+        <th>Current # of Players</th>
+        <th>Looking for # of Players</th>
+        <th>Gender of Additional Players</th>
+        <th>Notes</th>
+        <th> Edit Team </th>
+        <th> Delete Team </th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for team in teamsList %}
+        <tr>
+          <td>{{ team.teamName}}</td>
+          {% if team.owner.accountName == null or team.owner.accountName == ""   %}
+          <td></td>
+          {% else %}
+          <td><a href="{% url 'accounts:account' team.owner.accountName%}">{{ team.owner.accountName}}</td>
+          {% endif %}
+          <td>{{team.org.OrganisationName}}
+          <td>{{ team.sport}}</td>
+          <td>{{ team.day}}</td>
+          <td>{{ team.startTimeRange}}</td>
+          <td>{{ team.endTimeRange}}</td>
+          <td>{{ team.lengthOfGame}}</td>
+          <td>{{ team.location}}</td>
+          <td>{{ team.currentNumPlayers}}</td>
+          <td>{{ team.lookingNumPlayers}}</td>
+          <td>{{ team.lookingGenderPlayers}}</td>
+          <td>{{ team.notes}}</td>
+          <td><a href="{% url 'accounts:accountTeamsEdit' request.user.username team.id %}"> Edit Team </td>
+          <td><a href="{% url 'accounts:accountTeamsDelete' request.user.username team.id %}"> Delete Team </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="16">No data</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+{% endblock %}

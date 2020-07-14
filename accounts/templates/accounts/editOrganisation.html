@@ -1,0 +1,22 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<h2>You are editing your organisation named: {{org.OrganisationName}}</h2>
+<body>
+  <form action="{% url 'accounts:organisationEditMedium'  request.user.username org.id %}" target="_self" method="post">
+    {% csrf_token %}
+    {{form}}
+    <label for="orgName">Organisation Name:</label><br>
+    <input type="text" id="orgName" name="orgName" value = "{{org.OrganisationName}}"><br>
+    <br>
+
+    <label for="Registration_Link">Put in the link for players and teams to register</label><br>
+    <p> Make sure you include "http://" at the start of the address. E.g. "http://www.organisation/signup.com" </p>
+      <input type="text" id="Registration_Link" name="Registration_Link" maxlength="100" required value = "{{org.CompetitionRegistrationLink}}"><br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+</body>
+{% endblock content %}

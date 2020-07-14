@@ -1,0 +1,55 @@
+
+{% extends 'testing.html' %}
+
+
+{% block table %}
+<br>
+
+			<form method="get">
+
+				{{filter.form}}
+
+		    <button class="btn btn-primary" type="submit">Search</button>
+		  </form>
+
+<br>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Sports</th>
+        <th>Days</th>
+        <th>Available Start Time</th>
+        <th>Available End Time</th>
+        <th>Gender</th>
+				<th>Permanent</th>
+				<th>Fill-In</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ad in advertisementList %}
+        <tr>
+          <td><a href="{% url 'accounts:account' ad.owner.accountName %}">{{ ad.owner.accountName }}</td>
+          <td>{{ ad.ownerFirstName}}</td>
+          <td>{{ ad.ownerLastName}}</td>
+          <td>{{ad.sport}}</td>
+          <td>{{ad.days}}</td>
+          <td>{{ad.EarliestTime}}</td>
+          <td>{{ad.LatestTime}}</td>
+          <td>{{ad.gender}}</td>
+					<td>{{ad.Permanent}}</td>
+					<td>{{ad.FillIn}}</td>
+          <td>{{ad.notes}}</td>
+
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="7">No data</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

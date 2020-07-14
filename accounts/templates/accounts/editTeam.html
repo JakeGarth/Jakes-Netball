@@ -1,0 +1,95 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+
+{% if request.user.username != accountName%}
+  <p> This is not your account </p>
+{% else %}
+<!DOCTYPE html>
+<html>
+<h2>You are editing the team details of {{team.teamName}}. Your old team will be replaced with whatever details you put in here...</h2>
+<body>
+  <form action="{% url 'accounts:accountTeamsEditMedium'  request.user.username team.id %}" target="_self" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="hidden" id="organisationName" name='organisationName' value = "{{nameOfOrg}}">
+
+
+    <label for="fname">Team name:</label><br>
+    <input type="text" id="fname" name="fname" required maxlength="25" value = "{{team.teamName}}"><br>
+    <br />
+
+
+    <label for="Day" >Day:</label><br>
+    <select name="Days" required size="7" multiple>
+       {% for weekDay in listOfDaysInWeek %}
+
+        {% if weekDay in team.day %}
+           <option selected value="{{weekDay}}">{{weekDay}}</option>
+        {% else %}
+          <option  value="{{weekDay}}">{{weekDay}}</option>
+         {% endif %}
+
+        {% endfor %}
+    </select>
+    <br />
+    <br>
+
+    <label for="Sport" >Sport:</label><br>
+    <select name="Sport"  required size="5">
+        {% for sport in sportsList %}
+        {% if sport.name == team.sport %}
+          <option selected value="{{sport.name}}">{{sport.name}}</option>
+          {% else %}
+          <option  value="{{sport.name}}">{{sport.name}}</option>
+          {% endif %}
+          {% endfor %}
+    </select>
+    <br>
+
+    <label for="teamLocation">Location:</label><br>
+    <input type="text" id="teamLocation" name="teamLocation" value="MQ Gym" required maxlength="50" value = "{{team.location}}"><br>
+    <br />
+
+    <label for="lengthOfGame">Length of Game:</label><br>
+    <input type="text" id="lengthOfGame" name="lengthOfGame" required maxlength="10" value = "{{team.lengthOfGame}}"><br>
+    <br />
+    <label for="start-time">Earliest Possible Start Time: </label>
+    <input id="start-time" type="time" name="start-time" value="{{startHour}}:{{startMinute}}" required>
+    <br>
+    <label for="end-time">Latest Possible End:   </label>
+    <input id="end-time" type="time" name="end-time" value="{{endHour}}:{{endMinute}}" required>
+    <br>
+    <label for="currentPlayers">How many players do you have?</label>
+    <input type="number" id="currentPlayers" name="currentPlayers" min="1" max="100" step = "1" value = "{{team.currentNumPlayers}}" required>
+    <br>
+    <label for="lookingPlayers">How many players are you looking for?</label>
+    <input type="number" id="lookingPlayers" name="lookingPlayers" min="1" max="100" step = "1" value = "{{team.lookingNumPlayers}}" required>
+    <br>
+
+
+    <label for="genderRequirements" >Gender requirement:</label><br>
+    <select name="genderRequirements" required size="3">
+      {% for gender in listOfGenderOptions %}
+      {% if gender == team.lookingGenderPlayers %}
+       <option selected value="{{gender}}">{{gender}}</option>
+      {% else %}
+       <option  value="{{gender}}">{{gender}}</option>
+       {% endif %}
+      {% endfor %}
+    </select>
+    <br />
+    <br>
+
+    <label for="Notes">Any additional notes you want to share. e.g. Positions, grade, experience, etc...</label><br>
+    <textarea id="Notes" name="Notes" rows="4" cols="50" maxlength="999">{{team.notes}}</textarea>
+    <br>
+    <br/>
+    <input type="submit" value="Submit">
+
+  </form>
+
+
+<text> Thanks </text>
+</body>
+{% endif %}
+{% endblock content %}

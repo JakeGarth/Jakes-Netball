@@ -1,0 +1,52 @@
+{% extends 'testing.html' %}
+{% load admin_list %}
+
+{% block table %}
+
+{% if request.user.username != accountName%}
+  <p> This is not your account </p>
+{% else %}
+
+<br>
+
+			<form method="get">
+
+				{{myFilter.form}}
+
+		    <button class="btn btn-primary" type="submit">Search</button>
+		  </form>
+
+<br>
+
+
+<h1> You are looking at organisations you have advertised! </h1>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Organisation Name</th>
+        <th>Organisation Owner</th>
+        <th>Registration Link</th>
+        <th>Competitions</th>
+        <th>Edit Organisation</th>
+        <th>Delete Organisation</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for org in orgsList %}
+        <tr>
+          <td><a href="{% url 'organisation:organisationHome' org.OrganisationName %}">{{ org.OrganisationName}}</td>
+          <td>{{org.owner.accountName}}
+          <td>{{org.CompetitionRegistrationLink}}</td>
+          <td><a href="{% url 'organisation:viewCompetitions' org.OrganisationName %}"> Competitons </td>
+          <td><a href="{% url 'accounts:organisationEdit' accountName org.id %}"> Edit Org </td>
+          <td><a href="{% url 'accounts:organisationDelete' accountName org.id %}"> Delete Org </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="16">No data</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<h2>You are making a sport</h2>
+<body>
+  <form action="{% url 'organisation:makeSportMedium'  %}" target="_self" method="post">
+    {% csrf_token %}
+    {{form}}
+
+    <label for="fname">Sport name:</label><br>
+    <input type="text" id="fname" name="fname"><br>
+    <br />
+
+    <input type="submit" value="Submit">
+
+  </form>
+
+
+<text> Thanks </text>
+</body>
+{% endblock content %}

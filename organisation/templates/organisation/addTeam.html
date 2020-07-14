@@ -1,0 +1,80 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<h2>Enter Team name to add a team to {{nameOfOrg}}</h2>
+<body>
+  <form action="{% url 'organisation:addTeamMedium' nameOfOrg %}" target="_self" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="hidden" id="organisationName" name='organisationName' value = "{{nameOfOrg}}">
+
+    <label for="fname">Team name:</label><br>
+    <input type="text" id="fname" name="fname" required maxlength="25"><br>
+    <br />
+
+
+    <label for="Day" >Day:</label><br>
+    <select name="Days" required size="7">
+       <option value="Monday">Monday</option>
+       <option value="Tuesday">Tuesday</option>
+       <option value="Wednesday">Wednesday</option>
+       <option value="Thursday">Thursday</option>
+       <option value="Friday">Friday</option>
+       <option value="Saturday">Saturday</option>
+       <option value="Sunday">Sunday</option>
+    </select>
+    <br />
+    <br>
+
+    <label for="Sport" >Sport:</label><br>
+    <select name="Sport"  required size="5">
+        {% for sport in sportsList %}
+         <option value="{{sport.name}}">{{sport.name}}</option>
+        {% endfor %}
+    </select>
+    <br>
+
+    <label for="teamLocation">Location:</label><br>
+    <input type="text" id="teamLocation" name="teamLocation" value="MQ Gym" required maxlength="50"><br>
+    <br />
+
+    <label for="lengthOfGame">Length of Game:</label><br>
+    <input type="text" id="lengthOfGame" name="lengthOfGame" value="1 Hour" required maxlength="10"><br>
+    <br />
+    <label for="start-time">Earliest Possible Start Time: </label>
+    <input id="start-time" type="time" name="start-time" value="00:00" required>
+    <br>
+    <label for="end-time">Latest Possible End:   </label>
+    <input id="end-time" type="time" name="end-time" value="00:00" required>
+    <br>
+    <label for="currentPlayers">How many players do you have?</label>
+    <input type="number" id="currentPlayers" name="currentPlayers" min="1" max="100" step = "1" required>
+    <br>
+    <label for="lookingPlayers">How many players are you looking for?</label>
+    <input type="number" id="lookingPlayers" name="lookingPlayers" min="1" max="100" step = "1" required>
+    <br>
+
+
+    <label for="genderRequirements" >Gender requirement:</label><br>
+    <select name="genderRequirements" required size="3">
+       <option value="Female">Female</option>
+       <option value="Male">Male</option>
+       <option value="Either">Either</option>
+    </select>
+    <br />
+    <br>
+
+    <label for="Notes">Any additional notes you want to share. e.g. Positions, grade, experience, etc...</label><br>
+    <textarea id="Notes" name="Notes" rows="4" cols="50" maxlength="999"></textarea>
+    <br>
+    <br/>
+
+    <input type="submit" value="Submit">
+
+  </form>
+
+
+<text> Thanks </text>
+</body>
+{% endblock content %}

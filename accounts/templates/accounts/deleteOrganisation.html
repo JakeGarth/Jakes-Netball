@@ -1,0 +1,28 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+
+{% if request.user.username != accountName%}
+  <p> This is not your account </p>
+  <p> {{request.user.username}}  = {{accountName}}
+{% else %}
+
+<!DOCTYPE html>
+<html>
+<h2>You are deleting the organisation {{org.OrganisationName}}. Nobody else will be able to see the organisation once you delete it.</h2>
+<h4> If you click the button, your organisation will be deleted. </h4>
+<body>
+  <form action="{% url 'accounts:organisationDeleteMedium'  request.user.username org.id %}" target="_self" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="hidden" id="organisationName" name='organisationName' value = "{{nameOfOrg}}">
+
+
+    <input type="submit" value="Delete">
+
+  </form>
+
+
+
+</body>
+{% endif %}
+{% endblock content %}

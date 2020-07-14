@@ -1,0 +1,47 @@
+-members don't go through when there are two teams of the same name - fixed
+-fix so it displays login name in nav bar - fixed
+-cap the amount of people per team - fixed, different requirement now
+-manually set things such as cap, date, location - fixed
+-input gender - fixed
+-need to make login so i can see who is commenting stuff - fixed
+-need to display error message when submitting team name goes wrong
+-display the owner of the team + contact details - fixed
+-display the owner of the org + contact details
+-make sure passwords are encrypted, they aren't encrypted in POST on local machine
+- only display individuals/teams in each organisation for the correspoinding org - fixed
+- display organisation on personal account teams and ads - fixed
+- for all urls in the accounts app, only those logged in can see their own urls - partially fixed
+- make a privacy policy
+- make a searching and sorting functionalty for the tables
+- make text input limits on edit profile - fixed
+- competition start date on teams view table - fixed
+- include "date added" to the teams and advertisement tables
+- better way to display organisations
+- "length of game" in edit teams doesn't show the original data - fixed
+- need to tie users to organisations they make - fixed
+- make a competitions app - fixed, just made comp model in Organisation
+- put competition name in the table
+- make a "fill in" app for people looking for one-offs
+- search not working in most searches
+- need a footer - fixed
+- need to fix game length and dates - maybe change game length to "amount of minutes in game"
+- clean up the top cards in testing.html
+- insert registration link in competition form - fixed
+- owner needs to be able to delete competitions and organisations they made
+- force login for more all pages - fixed for now
+- gender drop down box
+- have a "home" page in the nav bar - fixed
+- need to put user restrictions to who can visit ....delete/medium.... pages in the view functions, look at compDeleteMedium view -fixed , do the same for edits - fixed
+- put tables on cards on all tables (including tables in accounts)
+- fix footer on home page - fixed
+- need an edit competition - fixed
+- fix links in testing.html
+- need a better way of displaying links to other places, get rid of the top cards, probably just buy a template online
+- need an "add competiton" button in the organisation page: e.g. http://127.0.0.1:8000/organisation/viewCompetitions/MQ%20Soccer%20Gym
+- maybe put forms on cards to make it obvious what people are filling out
+-in process of doing edit comp medium - fixed
+- bug when changing owner details doesn't update database for owners ads and teams - fixed
+- maybe make only one advertisement per competition per person
+- enable sort tables
+- change game lengths to minutes
+- put every form and table on cards

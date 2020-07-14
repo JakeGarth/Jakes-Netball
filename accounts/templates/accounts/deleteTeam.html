@@ -1,0 +1,27 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+
+{% if request.user.username != accountName%}
+  <p> This is not your account </p>
+{% else %}
+
+<!DOCTYPE html>
+<html>
+<h2>You are deleting the team {{team.teamName}}. Nobody else will be able to see the team once you delete it.</h2>
+<h4> If you click the button, your team will be deleted. </h4>
+<body>
+  <form action="{% url 'accounts:accountTeamsDeleteMedium'  request.user.username team.id %}" target="_self" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="hidden" id="organisationName" name='organisationName' value = "{{nameOfOrg}}">
+  
+
+    <input type="submit" value="Delete">
+
+  </form>
+
+
+
+</body>
+{% endif %}
+{% endblock content %}

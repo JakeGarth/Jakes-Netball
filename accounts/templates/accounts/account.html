@@ -1,0 +1,29 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+<div class="card" style="width: 18rem;">
+   <img src="{{accountInstance.image.url}}" alt="Sharon" width="350" height="500">
+    <div class="card-body">
+      <h5 class="card-title">{{accountInstance.first_name}} {{accountInstance.last_name}}</h5>
+      <p class="card-text">{{accountInstance.description}}</p>
+    </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Gender: {{accountInstance.gender}}</li>
+        <li class="list-group-item">Phone: {{accountInstance.phone_number}}</li>
+        <li class="list-group-item">Email: {{accountInstance.email}}</li>
+      </ul>
+      <div class="card-body">
+      {% if request.user.username == accountInstance.accountName%}
+        <a href="{% url 'accounts:accountEdit' accountInstance.accountName %}" class="card-link">Edit Details</a>
+        <br>
+        <a href="{% url 'accounts:accountOrganisations' accountInstance.accountName %}" class="card-link">Your Organisations</a>
+        <br>
+        <a href="{% url 'accounts:accountTeams' accountInstance.accountName %}" class="card-link">Your Teams</a>
+        <br>
+        <a href="{% url 'accounts:accountAdvertisements' accountInstance.accountName %}" class="card-link">Your Advertisements</a>
+      {% else %}
+      {% endif %}
+
+    </div>
+</div>
+{% endblock %}

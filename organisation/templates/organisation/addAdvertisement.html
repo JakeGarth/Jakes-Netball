@@ -1,0 +1,59 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<h2>You are advertising yourself to join a team!</h2>
+<body>
+  <form action="{% url 'organisation:addAdvertisementMedium' nameOfOrg %}" target="_self" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="hidden" id="organisationName" name='organisationName' value = "{{nameOfOrg}}">
+
+    <label for="Day" >Day:</label><br>
+    <select name="Days" required size="7" multiple>
+       <option value="Monday">Monday</option>
+       <option value="Tuesday">Tuesday</option>
+       <option value="Wednesday">Wednesday</option>
+       <option value="Thursday">Thursday</option>
+       <option value="Friday">Friday</option>
+       <option value="Saturday">Saturday</option>
+       <option value="Sunday">Sunday</option>
+    </select>
+
+    <br/>
+    <p>Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</p>
+    <br>
+
+
+    <label for="Sport" >Sport:</label><br>
+    <select name="Sport"  required size="5" multiple>
+        {% for sport in sportsList %}
+         <option value="{{sport.name}}">{{sport.name}}</option>
+        {% endfor %}
+    </select>
+
+    <br/>
+    <p>Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</p>
+    <br>
+
+    <label for="start-time">Earliest Time Available: </label>
+    <input id="start-time" type="time" name="start-time" value="13:30">
+    <br>
+    <label for="end-time">Latest Time Available:   </label>
+    <input id="end-time" type="time" name="end-time" value="20:00">
+    <br>
+    <br>
+
+    <label for="Notes">Any additional notes you want to share. e.g. Positions, grade, experience, etc...</label><br>
+    <textarea id="Notes" name="Notes" rows="4" cols="50"></textarea>
+    <br>
+    <br />
+
+    <input type="submit" value="Submit">
+
+  </form>
+
+
+<text> Thanks </text>
+</body>
+{% endblock content %}

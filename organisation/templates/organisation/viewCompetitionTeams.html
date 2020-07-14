@@ -1,0 +1,58 @@
+{% extends 'CompetitionTeams.html' %}
+
+
+{% block table %}
+<h1> You are in a {{nameOfOrg}} competition </h1>
+<br>
+
+			<form method="get">
+
+				{{filter.form}}
+
+		    <button class="btn btn-primary" type="submit">Search</button>
+		  </form>
+
+<br>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Team Name</th>
+        <th>Contact Username</th>
+        <th>Sport</th>
+        <th>Day</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Game Length</th>
+        <th>Location </th>
+        <th># of Players Needed</th>
+        <th>Gender of Players Needed</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for team in teamsList %}
+        <tr>
+          <td>{{ team.teamName}}</td>
+          {% if team.owner.accountName == null or team.owner.accountName == ""   %}
+          <td></td>
+          {% else %}
+          <td><a href="{% url 'accounts:account' team.owner.accountName%}">{{ team.owner.accountName}}</td>
+          {% endif %}
+          <td>{{ team.sport}}</td>
+          <td>{{ team.day}}</td>
+          <td>{{ team.startTimeRange}}</td>
+          <td>{{ team.endTimeRange}}</td>
+          <td>{{ team.lengthOfGame}}</td>
+          <td>{{ team.location}}</td>
+          <td>{{ team.lookingNumPlayers}}</td>
+          <td>{{ team.lookingGenderPlayers}}</td>
+          <td>{{ team.notes}}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="15">No data</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

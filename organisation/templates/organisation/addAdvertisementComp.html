@@ -1,0 +1,29 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<h2>You are advertising yourself to join a team in comp {{compID}}!</h2>
+<body>
+  <form action="{% url 'organisation:addAdvertisementCompMedium' nameOfOrg compID %}" target="_self" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="hidden" id="organisationName" name='organisationName' value = "{{nameOfOrg}}">
+
+    <br>
+    <label for="Notes"><h4>Any additional notes you want to share. e.g. Positions, grade, experience, etc...</h4></label><br>
+    <textarea id="Notes" name="Notes" rows="4" cols="50"></textarea>
+    <br>
+    <br />
+
+    <h4>Did you want to be a permanent team member, a fill-in, or both?</h4>
+    <input type="checkbox" id="permanent" name="permanent" value=True>
+    <label for="permanent"> Permanent Player</label><br>
+    <input type="checkbox" id="FillIn" name="FillIn" value=True>
+    <label for="FillIn"> Fill-In Player</label><br>
+
+    <input type="submit" value="Submit">
+
+  </form>
+
+</body>
+{% endblock content %}

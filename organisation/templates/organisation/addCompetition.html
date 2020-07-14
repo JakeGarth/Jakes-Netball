@@ -1,0 +1,97 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+<p> {{request.user.username}}  {{orgOwner}}    </p>
+{% if request.user.username != orgOwner%}
+  <p> This is not your account </p>
+{% else %}
+<!DOCTYPE html>
+<html>
+<h2>You are adding a competition!</h2>
+<body>
+  <form action="{% url 'organisation:addCompetitionsMedium' nameOfOrg %}" target="_self" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="hidden" id="organisationName" name='organisationName' value = "{{nameOfOrg}}">
+
+    <label for="Day" >Day:</label><br>
+    <select name="Days" required size="7">
+       <option value="Monday">Monday</option>
+       <option value="Tuesday">Tuesday</option>
+       <option value="Wednesday">Wednesday</option>
+       <option value="Thursday">Thursday</option>
+       <option value="Friday">Friday</option>
+       <option value="Saturday">Saturday</option>
+       <option value="Sunday">Sunday</option>
+    </select>
+
+
+    <br>
+    <br>
+
+    <label for="Sport" >Sport:</label><br>
+    <select name="Sport"  required size="5">
+        {% for sport in sportsList %}
+         <option value="{{sport.name}}">{{sport.name}}</option>
+        {% endfor %}
+    </select>
+
+    <br>
+    <br>
+    <label for="start-date">What date does the competition start?</label><br>
+    <input type="date" id="start-date" name="start-date"
+       min="2020-07-01" max="2023-01-01" required>
+
+    <br>
+    <br>
+    <label for="end-date">What date does the competition end?</label><br>
+    <input type="date" id="end-date" name="end-date"
+       min="2020-07-01" max="2023-01-01" required>
+
+       <br>
+       <br>
+
+       <br />
+       <label for="start-time">Competition Start Time: </label>
+       <input id="start-time" type="time" name="start-time" value = "00:00" required>
+       <br>
+       <label for="end-time">Competition Finish Time:   </label>
+       <input id="end-time" type="time" name="end-time" value = "12:00" required>
+       <br>
+       <br>
+
+
+       <label for="length">How long are the games? e.g. 40 min, 1 hour, etc</label><br>
+         <input type="text" id="length" name="length" maxlength="10" required><br>
+
+    <br>
+
+    <label for="Grade">What grade is this competition? A, B, 1, 2, Social, etc...</label><br>
+      <input type="text" id="Grade" name="Grade" value = "Social" maxlength="10" required><br>
+    <br>
+    <br />
+
+    <label for="Location">What is the location?</label><br>
+      <input type="text" id="Location" name="Location" maxlength="30" required><br>
+    <br>
+    <br />
+
+    
+
+    <label for="Gender" >Gender requirement:</label><br>
+    <select name="Gender" required size="3">
+      {% for gender in genderList %}
+       <option  value="{{gender}}">{{gender}}</option>
+      {% endfor %}
+    </select>
+    <br />
+    <br>
+
+    <input type="submit" value="Submit">
+
+  </form>
+
+
+<text> Thanks </text>
+</body>
+{% endif %}
+{% endblock content %}

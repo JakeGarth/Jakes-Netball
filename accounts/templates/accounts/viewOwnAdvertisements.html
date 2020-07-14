@@ -1,0 +1,55 @@
+{% extends 'testing.html' %}
+
+
+{% block table %}
+{% if request.user.username != accountName%}
+  <p> This is not your account </p>
+{% else %}
+
+<br>
+			<form method="get">
+				{{myFilter.form}}
+		    <button class="btn btn-primary" type="submit">Search</button>
+		  </form>
+<br>
+
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Sports</th>
+        <th>Days</th>
+        <th>Organisation</th>
+        <th>Available Start Time</th>
+        <th>Available End Time</th>
+        <th>Gender</th>
+        <th>Notes</th>
+        <th>Ad Id</th>
+        <th> Edit Team </th>
+        <th> Delete Team </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ad in advertisementList %}
+        <tr>
+          <td><a href="{% url 'accounts:account' ad.owner.accountName %}">{{ ad.owner.accountName }}</td>
+          <td>{{ad.sport}}</td>
+          <td>{{ad.days}}</td>
+          <td>{{ad.org.OrganisationName}} </td>
+          <td>{{ ad.EarliestTime}}</td>
+          <td>{{ ad.LatestTime}}</td>
+          <td>{{ ad.owner.gender}}</td>
+          <td>{{ ad.notes}}</td>
+          <td>{{ ad.id}}</td>
+          <td><a href="{% url 'accounts:accountAdEdit' request.user.username ad.id %}">Edit Ad</td>
+          <td><a href="{% url 'accounts:accountAdDelete' request.user.username ad.id %}">Delete Ad</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="15">No data</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+{% endblock %}

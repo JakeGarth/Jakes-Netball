@@ -1,0 +1,31 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<h2>Enter Team Name to Make a Team for {{orgName}}</h2>
+<body>
+  <form action="{% url 'organisation:organisationHome' '{{orgName}}' %}" target="_self" method="post">
+    {% csrf_token %}
+    {{form}}
+    <label for="fname">Team name:</label><br>
+    <input type="text" id="fname" name="fname" value="John"><br>
+    <br />
+    <label for="teamDay">Day:</label><br>
+    <input type="text" id="teamDay" name="teamDay" value="Monday"><br>
+    <br />
+    <label for="teamLocation">Location:</label><br>
+    <input type="text" id="teamLocation" name="teamLocation" value="MQ Gym"><br>
+    <br />
+    <label for="lengthOfGame">Length of Game:</label><br>
+    <input type="text" id="lengthOfGame" name="lengthOfGame" value="1 Hour"><br>
+    <br />
+    <label for="startTime">Start Time:</label><br>
+    <input type="text" id="startTime" name="startTime"  value="6pm"><br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+
+<text> Thanks </text>
+</body>
+{% endblock content %}

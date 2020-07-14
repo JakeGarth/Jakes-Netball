@@ -1,0 +1,34 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+<!DOCTYPE html>
+{% load static %}
+<head>
+      <!--  <link rel="stylesheet" type="text/css" href="/static/css/stylesheet.css" /> -->
+
+</head>
+<html>
+<h2> Test </h2>
+<div class="container">
+  <div class="card card-body">
+<h2>Enter Organisation Name:</h2>
+<body>
+  <form action="{% url 'organisation:makeOrgMedium'%}" target="_self" method="post">
+    {% csrf_token %}
+    {{form}}
+    <label for="orgName">Organisation Name:</label><br>
+    <input type="text" id="orgName" name="orgName"><br>
+
+    <br>
+
+
+    <label for="Registration_Link">Put in the link for players and teams to register</label><br>
+    <p> Make sure you include "http://" at the start of the address. E.g. "http://www.organisation/signup.com" </p>
+      <input type="text" id="Registration_Link" name="Registration_Link" maxlength="100" required><br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+</body>
+</div>
+</div>
+{% endblock content %}

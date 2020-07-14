@@ -1,0 +1,60 @@
+{% extends 'base_layout.html' %}
+
+
+{% block test %}
+<div class="row">
+ <div class="col-md">
+   <div class="card card-body">
+     <h5>{{nameOfOrg}}</h5>
+     <hr>
+     <a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'organisation:organisationHome' nameOfOrg %}">Organisation Home Page</a>
+     <a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'accounts:account' request.user.username %}">Organisation Contact</a>
+
+   </div>
+ </div>
+
+ <div class="col-md">
+   <div class="card card-body">
+     <h5>Competitions</h5>
+     <hr>
+      <a class="btn btn-outline-info  btn-sm btn-block" href="">Our Competitions</a>
+     <a class="btn btn-outline-info  btn-sm btn-block" href="">Registration Link</a>
+   </div>
+ </div>
+
+ <div class="col-md">
+   <div class="card card-body">
+     <h5>Advertise</h5>
+     <hr>
+       <a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'accounts:account' request.user.username %}">Advertise Your Team</a>
+
+		  <a class="btn btn-outline-info  btn-sm btn-block"  href="{% url 'accounts:accountAdvertisements' request.user.username %}">Advertise Yourself</a>
+
+   </div>
+ </div>
+</div>
+
+<main role="main" class="container">
+  <div class="row">
+    <div class="col-xl-12 align-self-center">
+      {% block content %}{% endblock %}
+    </div>
+
+    <br>
+
+
+     <br>
+
+       <div class="card card-body">
+          {% block table %}
+
+          {% endblock %}
+        </div>
+
+</main>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<br>
+{% endblock %}

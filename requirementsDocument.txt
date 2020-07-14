@@ -1,0 +1,17 @@
+1. website has accounts page where teams can be advertised
+2. have an organisation/accounts page where people can advertise they are looking to join a teams
+3. email host of advertisor of team on organisation account
+4. have a "looking for" section in teams
+5. make a rating/recommendation system
+
+Reasons
+1. allows teams that need a few more people to advertise
+2. allows individuals that missed out on the individuals team to join
+3. may help men that want to join individuals team but avoid violating the "3 men per term" rule
+
+To Do
+1. Need to make foreign key between team and owner of team
+
+
+Non-functional
+On the org home page, have a quadrant image displaying links to view/add team and view/add advertisement

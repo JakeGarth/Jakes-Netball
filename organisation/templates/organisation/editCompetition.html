@@ -1,0 +1,113 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+<p> {{request.user.username}}  {{org.owner.accountName}}    </p>
+{% if request.user.username != orgOwner%}
+  <p> This is not your account </p>
+{% else %}
+<!DOCTYPE html>
+<html>
+<h2>You are editing a competition!</h2>
+<body>
+  <form action="{% url 'organisation:editCompetitionMedium' comp.id %}" target="_self" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="hidden" id="organisationName" name='organisationName' value = "{{nameOfOrg}}">
+
+
+
+    <label for="Day" >Day:</label><br>
+    <select name="Days" required size="7" multiple>
+       {% for weekDay in listOfDaysInWeek %}
+       <p> {{weekDay}}  == {{ org.CompetitionDay}} </p>
+        {% if weekDay == comp.CompetitionDay %}
+           <option selected value="{{weekDay}}">{{weekDay}}</option>
+        {% else %}
+          <option  value="{{weekDay}}">{{weekDay}}</option>
+         {% endif %}
+
+        {% endfor %}
+    </select>
+    <br />
+    <br>
+
+
+
+
+    <label for="Sport" >Sport:</label><br>
+    <select name="Sport"  required size="5">
+        {% for sport in sportsList %}
+        {% if sport.name == comp.CompetitionSport  %}
+         <option  selected value="{{sport.name}}">{{sport.name}}</option>
+        {% else %}
+         <option value="{{sport.name}}">{{sport.name}}</option>
+         {% endif %}
+        {% endfor %}
+    </select>
+
+
+    <p> {{comp.CompetitionStartDate|date:"Y-m-d"}} </p>
+    <br>
+    <br>
+    <label for="start-date">What date does the competition start?</label><br>
+    <input type="date" id="start-date" name="start-date"
+       min="2020-07-01" max="2023-01-01" value = {{comp.CompetitionStartDate|date:"Y-m-d"}} required>
+
+    <br>
+    <br>
+    <label for="end-date">What date does the competition end?</label><br>
+    <input type="date" id="end-date" name="end-date"
+       min="2020-07-01" max="2023-01-01" value = {{comp.CompetitionEndDate|date:"Y-m-d"}} required>
+
+       {{time}}
+       <br>
+       <br>
+       <p> {{comp.CompetitionStartTime.split}} </p>
+       <br />
+       <label for="start-time">Competition Start Time: </label>
+       <input id="start-time" type="time" name="start-time" value = {{startTimeValue}} required>
+       <br>
+       <label for="end-time">Competition Finish Time:   </label>
+       <input id="end-time" type="time" name="end-time" value = {{endTimeValue}} required>
+       <br>
+       <br>
+
+
+       <label for="length">How long are the games? e.g. 40 min, 1 hour, etc</label><br>
+         <input type="text" id="length" name="length" maxlength="10" value = "{{comp.LengthOfGame}}" required><br>
+
+    <br>
+
+    <label for="Grade">What grade is this competition? A, B, 1, 2, Social, etc...</label><br>
+      <input type="text" id="Grade" name="Grade" maxlength="10" value = "{{comp.CompetitionGrade}}" required><br>
+    <br>
+    <br />
+
+    <label for="Location">What is the location?</label><br>
+      <input type="text" id="Location" name="Location" maxlength="30" value = "{{comp.CompetitionLocation}}" required><br>
+    <br>
+    <br />
+
+
+
+    <label for="Gender" >Gender requirement:</label><br>
+    <select name="Gender" required size="3">
+      {% for gender in genderList %}
+      {% if gender == comp.CompetitionGender  %}
+        <option selected value="{{gender}}">{{gender}}</option>
+      {% else %}
+        <option  value="{{gender}}">{{gender}}</option>
+      {% endif %}
+      {% endfor %}
+    </select>
+    <br />
+    <br>
+
+    <input type="submit" value="Submit">
+
+  </form>
+
+
+<text> Thanks </text>
+</body>
+{% endif %}
+{% endblock content %}

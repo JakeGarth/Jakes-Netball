@@ -1,0 +1,56 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+<p> {{ request.user.username}} = {{name}} </p>
+{% if request.user.username != name%}
+  <p> This is not your account </p>
+{% else %}
+
+
+
+<h1> Please include your contact details. This for other people that want to play on the same team as you! </h1>
+
+<div class="card" style="width: 18rem;">
+   <img src="{{accountInstance.image.url}}" alt="Sharon" width="350" height="500">
+    <div class="card-body">
+      <h5 class="card-title">{{accountInstance.first_name}} {{accountInstance.last_name}}</h5>
+      <p class="card-text">{{accountInstance.description}}</p>
+    </div>
+
+      <form action="{% url 'accounts:accountEditMedium' accountInstance.accountName %}" target="_self" method="post">
+        {% csrf_token %}
+        {{form}}
+        <label for="First_Name">First Name:</label><br>
+        <input type="text" id="First_Name" name="First_Name" value= '{{accountInstance.first_name}}' maxlength="50" required><br>
+        <br />
+        <label for="Last_Name">Last Name:</label><br>
+        <input type="text" id="Last_Name" name="Last_Name" value= '{{accountInstance.last_name}}' maxlength="50" required><br>
+        <br />
+        <label for="Description">Description:</label><br>
+        <input type="Description" id="Description" name="Description" value= '{{accountInstance.description}}' maxlength="999" required><br>
+        <br />
+        <label for="Gender" >Your Gender:</label><br>
+        <select name="Gender" required size="3" required>
+          {% for gender in genderList %}
+          {% if gender == accountInstance.gender  %}
+            <option selected value="{{gender}}">{{gender}}</option>
+          {% else %}
+            <option  value="{{gender}}">{{gender}}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+        <br />
+        <br>
+        <label for="Phone">Phone:</label><br>
+        <input type="text" id="Phone" name="Phone" value= '{{accountInstance.phone_number}}' maxlength="15" minlength="1" required><br>
+        <br />
+        <label for="Email">Email:</label><br>
+        <input type="text" id="Email" name="Email" value= '{{accountInstance.email}}' maxlength="50" minlength=""1 required><br>
+        <br />
+        <input type="submit" value="Submit">
+      </form>
+      {% endif %}
+
+    </div>
+
+{% endblock %}

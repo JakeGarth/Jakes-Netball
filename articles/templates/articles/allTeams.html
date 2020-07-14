@@ -1,0 +1,39 @@
+{% extends 'base_layout.html' %}
+
+
+{% block content%}
+<h1>You are in the {{orgName}} organisation home page</h1>
+
+<section class="pricing py-5">
+<div class="container">
+  <div class="row">
+    <!-- Free Tier -->
+    {% for team in teamsList %}
+    <div class="col-lg-4">
+      <div class="card mb-5 mb-lg-0">
+        <div class="card-body">
+          <h2 style="font-size:30px" class="card-price text-center">{{team.teamName}}<span class="period"></span></h2>
+          <h5 class="card-title text-muted text-uppercase text-center">{{team.day}}</h5>
+          <h5 class="card-title text-muted text-uppercase text-center">{{team.startTimeRange}}</h5>
+          <h5 class="card-title text-muted text-uppercase text-center">{{team.lengthOfGame}}</h5>
+          <h5 class="card-title text-muted text-uppercase text-center">{{team.location}}</h5>
+
+          <hr>
+          <ul class="fa-ul">
+            {% for i in team.members.all %}
+            <li><span class="fa-li"><i class="fas fa-check"></i></span>{{i.firstName}} {{i.lastName}}</li>
+            {% endfor %}
+          </ul>
+          <form class = "site-form" action="{% url 'joiningTeams' %}" method = "post">
+            {% csrf_token %}
+            {{form}}
+            <input type="hidden" id="teamName" name='teamName' value = "{{team.teamName}}">
+            <input type = "submit"  class="btn btn-block btn-primary text-uppercase" value = "Join Team">
+
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}

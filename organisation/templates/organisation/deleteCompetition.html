@@ -1,0 +1,26 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+
+{% if request.user.username != comp.CompetitionOrganisation.owner.accountName%}
+  <p> This is not your account </p>
+{% else %}
+
+<!DOCTYPE html>
+<html>
+<h2>You are deleting a competition in your organisation: {{org.OrganisationName}}. Nobody else will be able to see the competition once you delete it.</h2>
+<h4> If you click this button, your competition will be deleted. All other competitions in your organisation will remain visible.</h4>
+<body>
+  <form action="{% url 'organisation:competitionDeleteMedium' comp.id %}" target="_self" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="hidden" id="organisationName" name='organisationName' value = "{{nameOfOrg}}">
+
+    <input type="submit" value="Delete">
+
+  </form>
+
+
+
+</body>
+{% endif %}
+{% endblock content %}

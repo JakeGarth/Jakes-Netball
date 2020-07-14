@@ -1,0 +1,24 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<h2>Enter your details to join team {{postTeamName}} in {{orgName}} with ID {{teamID}} !</h2>
+
+<body>
+
+
+<form class = "site-form" action="{% url 'organisation:joiningTeamMedium' orgName %}" method = "post">
+  {% csrf_token %}
+  {{form}}
+  <label for="firstName">First name:</label><br>
+  <input type="text" id="firstName" name="firstName"><br>
+  <label for="lastName">Last name:</label><br>
+  <input type="text" id="lastName" name="lastName">
+  <input type = "hidden" id = "postTeamName" name = "postTeamName" value = "{{postTeamName}}">
+  <input type = "hidden" id = "teamID" name = "teamID" value = "{{teamID}}">
+  <input type = "submit" value = "Join Team">
+</form>
+<h3> {{Analyse.type}} </h3>
+<text> Thanks </text>
+</body>
+{% endblock content %}
